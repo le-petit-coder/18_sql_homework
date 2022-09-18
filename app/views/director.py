@@ -9,11 +9,11 @@ director_schema = DirectorSchema(many=True)
 
 @director_ns.route('/')
 class DirectorView(Resource):
-    def get_all(self):
+    def get(self):
         return director_schema.dump(director_service.get_all_directors()), 200
 
 
 @director_ns.route('/<int:did>')
 class DirectorView(Resource):
-    def get_by_id(self, did):
+    def get(self, did):
         return director_schema.dump(director_service.get_director_by_id(did=did)), 200

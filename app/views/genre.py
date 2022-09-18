@@ -9,11 +9,11 @@ genre_schema = GenreSchema(many=True)
 
 @genre_ns.route('/')
 class GenreView(Resource):
-    def get_all(self):
+    def get(self):
         return genre_schema.dump(genre_service.get_all_genres()), 200
 
 
 @genre_ns.route('/<int:gid>')
 class GenreView(Resource):
-    def get_by_id(self, gid):
+    def get(self, gid):
         return genre_schema.dump(genre_service.get_genre_by_id(gid=gid)), 200

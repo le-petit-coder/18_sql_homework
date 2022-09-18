@@ -10,7 +10,7 @@ movie_schema = MovieSchema(many=True)
 
 @movie_ns.route('/')
 class MovieView(Resource):
-    def get_all(self):
+    def get(self):
         args = flask.request.args
         if len(args):
             return movie_schema.dump(
@@ -28,17 +28,17 @@ class MovieView(Resource):
 
 @movie_ns.route('/<int:mid>')
 class MovieView(Resource):
-    def get_by_id(self, mid):
+    def get(self, mid):
         return movie_schema.dump(movie_service.get_movie_by_id(mid=mid)), 200
 
-    def update_movie(self):
+    def put(self):
         data = flask.request.json
         if movie_service.update_movie(data):
             return "update done", 200
         else:
             return "update failed"
 
-    def delete_movie(self, mid):
+    def delete(self, mid):
         if movie_service.delete_movie(mid):
             return "delete done", 204
         else:
